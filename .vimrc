@@ -1,7 +1,7 @@
 " echo ">^.^<"
 
 set number
-set textwidth=79  " lines longer than 79 columns will be broken
+"" set textwidth=79  " lines longer than 79 columns will be broken
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -13,8 +13,17 @@ set foldmethod=indent
 set foldlevel=99
 
 set backspace=indent,eol,start
+set hlsearch
 
 " just for keeping in mind, jump back -- <c-o>
+" from jedi_vim
+" Completion <C-Space>
+" Goto assignments <leader>g (typical goto function)
+" Goto definitions <leader>d (follow identifier as far as possible, includes imports and statements)
+" Show Documentation/Pydoc K (shows a popup with assignments)
+" Renaming <leader>r
+" Usages <leader>n (shows all the usages of a name)
+" Open module, e.g. :Pyimport os (opens the os module)
 
 let mapleader=","
 
@@ -41,6 +50,7 @@ vnoremap > >gv
 
 execute pathogen#infect()
 syntax on
+filetype plugin on
 filetype plugin indent on
 
 nnoremap <F5> :GundoToggle<CR>
@@ -70,3 +80,8 @@ EOF
 endif
 
 map <c-n> :NERDTreeToggle<CR>
+
+" Preview md file in chrome
+autocmd BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} vnoremap <Leader>p :!start "/opt/google/chrome/google-chrome %"<CR>
+
+autocmd BufWritePre *.py :%s/\s\+$//e
